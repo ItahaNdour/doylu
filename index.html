@@ -1,4 +1,3 @@
-<!-- File: public/index.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -33,11 +32,11 @@
     <span class="timer" id="countdown">--:--:--</span>
   </div>
 
-  <!-- Ramadan module -->
-  <section class="card" id="ramadan-card" style="margin-top:12px; padding:14px; display:none">
+  <!-- ✅ RAMADAN MODULE -->
+  <section class="card duo" id="ramadan-card" style="margin-top:12px; padding:14px; display:none">
     <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap">
-      <div>
-        <div style="font-weight:800; color:#1f5e53; font-size:16px">🌙 Ramadan</div>
+      <div style="text-align:left">
+        <div style="font-weight:900; color:#1f5e53; font-size:16px">🌙 Ramadan</div>
         <div class="small" id="ramadan-sub">—</div>
       </div>
       <div style="text-align:right">
@@ -46,12 +45,12 @@
       </div>
     </div>
 
-    <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between">
-      <div class="duo-item" style="flex:1; min-width:160px">
-        <div class="duo-title">Prochain Suhoor</div>
+    <div class="duo-grid" style="margin-top:12px">
+      <div class="duo-item">
+        <div class="duo-title">Suhoor (Fajr)</div>
         <div class="duo-time" id="ramadan-suhoor">--:--</div>
       </div>
-      <div class="duo-item" style="flex:1; min-width:160px">
+      <div class="duo-item">
         <div class="duo-title">Iftar (Maghrib)</div>
         <div class="duo-time" id="ramadan-iftar">--:--</div>
       </div>
@@ -146,6 +145,7 @@
   <div class="box admin">
     <span class="close">&times;</span><h3>Panneau d'administration</h3>
 
+    <!-- Super admin -->
     <div class="row" id="super-row" style="display:none">
       <div style="flex:1"><label>Mosquée</label><select id="adm-mosque"></select></div>
       <div><label>&nbsp;</label><button id="add-mosque" class="save" style="padding:10px 12px; background:#16a34a">Ajouter</button></div>
@@ -190,6 +190,7 @@
     </div>
     <label>Offsets (min) Fajr,Chourouk,Dhuhr,Asr,Maghrib,Isha</label><input id="adm-offsets" placeholder="0,0,0,0,0,0"/>
 
+    <!-- Avancé : super admin seulement -->
     <div id="advanced-block" style="display:none; border-top:1px dashed #e5e7eb; margin-top:12px; padding-top:10px">
       <h3>Options avancées</h3>
       <label>URL audio Adhan (mp3)</label><input id="adm-adhan-url" placeholder="https://…/adhan.mp3"/>
@@ -209,6 +210,6 @@
   </div>
 </div>
 
-<script type="module" src="./app.js"></script>
+<script src="./app.js"></script>
 </body>
 </html>
