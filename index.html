@@ -116,11 +116,39 @@
     </table>
   </section>
 
-  <!-- Qibla simplifiée -->
+  <!-- ✅ QIBLA (boussole petite & fonctionnelle) -->
   <section class="card qibla">
-    <h3 style="margin:0 0 8px; color:#1f5e53">🧭 Qibla</h3>
-    <p>Ouvrir la direction vers la Kaaba dans Google Maps selon la ville de la mosquée.</p>
-    <button class="btn btn-primary" id="qibla-maps"><i class="fa-solid fa-location-arrow"></i> Voir la Qibla sur Google Maps</button>
+    <div class="qibla-head">
+      <h3>🧭 Qibla</h3>
+      <button class="btn btn-primary qibla-btn" id="qibla-start">
+        <i class="fa-solid fa-compass"></i> Activer
+      </button>
+    </div>
+
+    <div class="qibla-wrap">
+      <div class="qibla-dial" aria-label="Boussole Qibla">
+        <div class="qibla-needle" id="qibla-needle">
+          <div class="qibla-arrow"></div>
+        </div>
+        <div class="qibla-center"></div>
+      </div>
+
+      <div class="qibla-info">
+        <div class="qibla-line">
+          <span class="small">Direction Qibla</span>
+          <strong id="qibla-bearing">—°</strong>
+        </div>
+        <div class="qibla-line">
+          <span class="small">Cap</span>
+          <strong id="qibla-heading">—°</strong>
+        </div>
+        <div class="small" id="qibla-status">Appuie sur “Activer” (permission cap + localisation).</div>
+
+        <button class="btn btn-ghost" id="qibla-maps">
+          <i class="fa-solid fa-location-arrow"></i> Ouvrir dans Google Maps
+        </button>
+      </div>
+    </div>
   </section>
 
   <div id="status" class="status"></div>
@@ -145,7 +173,6 @@
   <div class="box admin">
     <span class="close">&times;</span><h3>Panneau d'administration</h3>
 
-    <!-- Super admin -->
     <div class="row" id="super-row" style="display:none">
       <div style="flex:1"><label>Mosquée</label><select id="adm-mosque"></select></div>
       <div><label>&nbsp;</label><button id="add-mosque" class="save" style="padding:10px 12px; background:#16a34a">Ajouter</button></div>
@@ -190,7 +217,6 @@
     </div>
     <label>Offsets (min) Fajr,Chourouk,Dhuhr,Asr,Maghrib,Isha</label><input id="adm-offsets" placeholder="0,0,0,0,0,0"/>
 
-    <!-- Avancé : super admin seulement -->
     <div id="advanced-block" style="display:none; border-top:1px dashed #e5e7eb; margin-top:12px; padding-top:10px">
       <h3>Options avancées</h3>
       <label>URL audio Adhan (mp3)</label><input id="adm-adhan-url" placeholder="https://…/adhan.mp3"/>
