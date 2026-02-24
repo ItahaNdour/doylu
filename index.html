@@ -3,18 +3,23 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Mosquée – Horaires & Infos</title>
+  <title>MyMosque</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="stylesheet" href="./styles.css"/>
+
+  <!-- Chemins relatifs => OK pour https://itahandour.github.io/MyMosque/ -->
+  <link rel="stylesheet" href="styles.css?v=3"/>
 </head>
 
 <body>
 <header class="card">
-  <button id="admin-button" title="Administration"><i class="fa-solid fa-user-shield"></i></button>
+  <button id="admin-button" title="Administration" aria-label="Administration">
+    <i class="fa-solid fa-user-shield"></i>
+  </button>
+
   <h1 id="mosque-name">Mosquée</h1>
 
   <div class="sel-row">
@@ -32,15 +37,15 @@
     <span class="timer" id="countdown">--:--:--</span>
   </div>
 
-  <!-- ✅ RAMADAN MODULE -->
+  <!-- Ramadan -->
   <section class="card duo" id="ramadan-card" style="margin-top:12px; padding:14px; display:none">
-    <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap">
-      <div style="text-align:left">
-        <div style="font-weight:900; color:#1f5e53; font-size:16px">🌙 Ramadan</div>
+    <div class="ramadan-head">
+      <div class="ramadan-left">
+        <div class="ramadan-title">🌙 Ramadan</div>
         <div class="small" id="ramadan-sub">—</div>
       </div>
-      <div style="text-align:right">
-        <div style="font-weight:900; font-size:20px; color:#134e42" id="ramadan-day">—</div>
+      <div class="ramadan-right">
+        <div class="ramadan-day" id="ramadan-day">—</div>
         <div class="small" id="ramadan-left">—</div>
       </div>
     </div>
@@ -59,7 +64,6 @@
 </header>
 
 <main>
-  <!-- Horaires -->
   <section class="card list" aria-label="Horaires de prière">
     <div class="row" id="fajr-item"><span class="name" id="fajr-name">Souba (Fajr)</span><span class="time" id="fajr-time">--:--</span></div>
     <div class="row" id="dhuhr-item"><span class="name" id="dhuhr-name">Tisbar (Dhuhr)</span><span class="time" id="dhuhr-time">--:--</span></div>
@@ -68,21 +72,26 @@
     <div class="row" id="isha-item"><span class="name" id="isha-name">Guéwé (Isha)</span><span class="time" id="isha-time">--:--</span></div>
   </section>
 
-  <!-- Jumua / Chourouk -->
   <section class="card duo">
     <div class="duo-grid">
-      <div class="duo-item"><div class="duo-title">Jumua</div><div class="duo-time" id="jumua-time">13:30</div></div>
-      <div class="duo-item"><div class="duo-title">Chourouk</div><div class="duo-time" id="shuruq-time">--:--</div></div>
+      <div class="duo-item">
+        <div class="duo-title">Jumua</div>
+        <div class="duo-time" id="jumua-time">13:30</div>
+      </div>
+      <div class="duo-item">
+        <div class="duo-title">Chourouk</div>
+        <div class="duo-time" id="shuruq-time">--:--</div>
+      </div>
     </div>
   </section>
 
-  <!-- Dons (public) -->
   <section class="card don-public">
     <h3>💰 Faire un don</h3>
     <ul class="don-lines">
       <li><span><i class="fa-solid fa-wallet" style="color:#0ea5e9"></i> Wave Money</span><strong id="wave-number">—</strong></li>
       <li><span><i class="fa-solid fa-mobile-screen-button" style="color:#f97316"></i> Orange Money</span><strong id="orange-number">—</strong></li>
     </ul>
+
     <div class="don-cta">
       <button class="btn btn-primary" id="btn-wave"><i class="fa-solid fa-hand-holding-dollar"></i> Donner via Wave</button>
       <button class="btn btn-primary" id="btn-orange"><i class="fa-solid fa-hand-holding-dollar"></i> Donner via Orange</button>
@@ -90,14 +99,16 @@
     </div>
   </section>
 
-  <!-- Suivi (admin seulement) -->
   <section class="card don-admin" id="don-admin">
-    <h3 style="margin:0 0 8px; color:#1f5e53"><i class="fa-solid fa-chart-simple"></i> Suivi des dons</h3>
+    <h3 class="don-admin-title"><i class="fa-solid fa-chart-simple"></i> Suivi des dons</h3>
+
     <div class="kpis">
       <div>Objectif jour : <span id="don-goal">100 000</span> CFA</div>
       <div>Collecté : <span id="don-today">0</span> CFA</div>
     </div>
+
     <div class="progress" aria-label="Progression collecte"><span id="don-bar"></span></div>
+
     <div class="kpis">
       <div>Total mois : <span id="don-month">0</span> CFA</div>
       <div>Reste : <span id="don-left">0</span> CFA</div>
@@ -116,7 +127,6 @@
     </table>
   </section>
 
-  <!-- ✅ QIBLA (boussole petite & fonctionnelle) -->
   <section class="card qibla">
     <div class="qibla-head">
       <h3>🧭 Qibla</h3>
@@ -127,21 +137,13 @@
 
     <div class="qibla-wrap">
       <div class="qibla-dial" aria-label="Boussole Qibla">
-        <div class="qibla-needle" id="qibla-needle">
-          <div class="qibla-arrow"></div>
-        </div>
+        <div class="qibla-needle" id="qibla-needle"><div class="qibla-arrow"></div></div>
         <div class="qibla-center"></div>
       </div>
 
       <div class="qibla-info">
-        <div class="qibla-line">
-          <span class="small">Direction Qibla</span>
-          <strong id="qibla-bearing">—°</strong>
-        </div>
-        <div class="qibla-line">
-          <span class="small">Cap</span>
-          <strong id="qibla-heading">—°</strong>
-        </div>
+        <div class="qibla-line"><span class="small">Direction Qibla</span><strong id="qibla-bearing">—°</strong></div>
+        <div class="qibla-line"><span class="small">Cap</span><strong id="qibla-heading">—°</strong></div>
         <div class="small" id="qibla-status">Appuie sur “Activer” (permission cap + localisation).</div>
 
         <button class="btn btn-ghost" id="qibla-maps">
@@ -156,19 +158,17 @@
 
 <footer>
   <button id="events-btn"><i class="fa-solid fa-calendar-alt"></i><span>Événements</span></button>
-  <button id="names-btn" style="position:relative"><i class="fa-solid fa-kaaba"></i><span>Noms</span></button>
+  <button id="names-btn"><i class="fa-solid fa-kaaba"></i><span>Noms</span></button>
   <button id="announce-btn" style="position:relative"><i class="fa-solid fa-bell"></i><span>Annonces</span><span id="notif" class="notif">1</span></button>
   <button id="about-btn"><i class="fa-solid fa-circle-info"></i><span>À propos</span></button>
   <button id="share-btn"><i class="fa-brands fa-whatsapp"></i><span>Partager</span></button>
 </footer>
 
-<!-- Modals -->
 <div id="modal-ann" class="modal"><div class="box"><span class="close">&times;</span><h3>Annonces</h3><p id="announcement-text">—</p></div></div>
 <div id="modal-events" class="modal"><div class="box"><span class="close">&times;</span><h3>Événements</h3><div id="events-list">—</div></div></div>
 <div id="modal-names" class="modal"><div class="box"><span class="close">&times;</span><h3 id="names-header">Les 99 Noms d'Allah</h3><ul id="names-list"></ul></div></div>
 <div id="modal-about" class="modal"><div class="box"><span class="close">&times;</span><h3>À propos</h3><p><strong>Contact :</strong> <span id="about-contact-name">—</span><br><strong>Téléphone :</strong> <span id="about-contact-phone">—</span></p></div></div>
 
-<!-- Admin -->
 <div id="modal-admin" class="modal" role="dialog" aria-modal="true">
   <div class="box admin">
     <span class="close">&times;</span><h3>Panneau d'administration</h3>
@@ -236,6 +236,6 @@
   </div>
 </div>
 
-<script src="./app.js"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
